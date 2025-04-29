@@ -1,138 +1,97 @@
-"use client";
+"use client"; // Ensure this is a client component
 
-import { useEffect } from 'react';
-import { Button } from './ui/button';
-import { MessageSquare } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import {
+  type Configuration,
+  Webchat,
+  WebchatProvider,
+  getClient,
+} from '@botpress/webchat';
+import { Button } from '@/components/ui/button'; // Use shadcn Button
+import { MessageSquare } from 'lucide-react'; // Use lucide icon
 
+// Define Botpress integration details
+const clientId = 'ae9d16b8-77e5-4d77-b5d3-9f8ba18ae3a6'; // Replace with your actual Botpress Client ID
+const botId = 'YOUR_BOT_ID'; // Replace with your Botpress Bot ID if needed for specific config
+
+const configuration: Configuration = {
+  // Customize Botpress webchat appearance and behavior here
+  // Example: Change colors to match the theme
+  // primaryColor: '#2563eb', // Example: Blue (adjust HSL if using theme vars)
+  // backgroundColor: '#ffffff', // Example: White
+  // textColorOnBackground: '#000000', // Example: Black
+  // You can map theme variables here if needed, but ensure they are accessible client-side
+  // For simplicity, hardcoding or using basic colors might be easier initially.
+  botName: 'OptiAssist',
+  avatarUrl: '', // Optional: URL to the bot's avatar
+  botConversationDescription: 'Your AI-powered virtual assistant for Optitech Solutions.',
+  // Add other configuration options as needed: https://botpress.com/docs/cloud/webchat/customization
+};
+
+// Ensure the component is exported as default if it's the main export
 export function BotpressChat() {
+  const [isClient, setIsClient] = useState(false);
+  const [isWebchatOpen, setIsWebchatOpen] = useState(false);
+  const clientRef = useRef<any>(null); // Use useRef to hold the client instance
+
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://cdn.botpress.cloud/webchat/v1/inject.js';
-    script.async = true;
-    document.body.appendChild(script);
-
-    script.onload = () => {
-       if (window.botpressWebChat) {
-            window.botpressWebChat.init({
-              // --- Required ---
-              "composerPlaceholder": "Chat with OptiAssist", // Placeholder text in the chat input
-              "botConversationDescription": "Your AI assistant for Optitech services", // Description shown in the header
-              "botId": "YOUR_BOTPRESS_BOT_ID", // Replace with your Botpress Bot ID
-              "hostUrl": "https://cdn.botpress.cloud/webchat/v1", // Botpress hosting URL
-              "messagingUrl": "https://messaging.botpress.cloud", // Botpress messaging URL
-
-              // --- Optional ---
-              "clientId": "YOUR_BOTPRESS_CLIENT_ID", // Replace with your Botpress Client ID (often same as Bot ID)
-              "botName": "OptiAssist", // Name displayed in the chat header
-              // "avatarUrl": "URL_TO_YOUR_BOT_AVATAR", // Optional: URL for the bot's avatar
-              // "phoneNumber": "+15551234567", // Optional: Phone number displayed
-              "stylesheet": "https://webchat-styler-widgets.botpress.app/prod/7b1f1c5f-0c0a-4a0e-8a32-0c5a832d5b2d/v40338/style.css", // Optional: Link to custom CSS (if any)
-              // Styling adjustments (match theme)
-              "frontendVersion": "v1",
-              "useSessionStorage": true, // Persist chat across page refreshes
-              "enableConversationDeletion": true, // Allow users to delete conversation history
-
-              // Theme Colors (Adjust based on globals.css)
-              "brandColor": "hsl(221, 83%, 53%)", // Primary blue
-              "conversationColor": "hsl(173, 58%, 39%)", // Secondary teal
-              "buttonBackgroundColor": "hsl(221, 83%, 53%)",
-              "buttonTextColor": "hsl(0, 0%, 98%)",
-              "headerBackgroundColor": "hsl(221, 83%, 53%)",
-              "headerTextColor": "hsl(0, 0%, 98%)",
-
-              // Customization
-              "hideWidget": true, // Hide the default launcher, we use our own
-              "disableAnimations": false,
-              "closeOnEscape": true,
-              "showConversationsButton": false, // Hide the default conversations button if not needed
-              "enableTranscriptDownload": true, // Allow users to download chat transcript
-            });
-
-            // Ensure the chat stays hidden initially until our button is clicked
-             window.botpressWebChat.onEvent(
-                () => {
-                  window.botpressWebChat.sendEvent({ type: 'hide' })
-                },
-                ['LIFECYCLE.LOADED']
-             )
-
-       } else {
-           console.error("Botpress WebChat not loaded");
+    // Ensure client-side execution
+    setIsClient(true);
+    // Initialize the client only once
+    if (!clientRef.current) {
+       try {
+         clientRef.current = getClient({
+           clientId: clientId,
+           // botId: botId, // Uncomment if needed
+         });
+       } catch (error) {
+         console.error("Failed to initialize Botpress client:", error);
+         // Handle initialization error (e.g., show a message)
        }
-    };
-
-    return () => {
-      // Clean up the script when the component unmounts
-       const existingScript = document.querySelector(
-         'script[src="https://cdn.botpress.cloud/webchat/v1/inject.js"]'
-       );
-       if (existingScript) {
-         document.body.removeChild(existingScript);
-       }
-       // Also remove the webchat container if it exists
-       const webchatContainer = document.getElementById('botpress-webchat-container');
-        if (webchatContainer) {
-            webchatContainer.remove();
-        }
-    };
-  }, []);
-
-  const toggleChat = () => {
-    if (window.botpressWebChat) {
-      window.botpressWebChat.sendEvent({ type: 'toggle' });
-    } else {
-        console.error("Botpress WebChat not available to toggle.")
     }
+  }, []); // Empty dependency array ensures this runs only once on mount
+
+  const toggleWebchat = () => {
+    setIsWebchatOpen((prevState) => !prevState);
   };
 
+  // Render null or a placeholder during server-side rendering or before client is ready
+  if (!isClient || !clientRef.current) {
+    return null; // Or a loading indicator
+  }
+
   return (
-     <Button
-        aria-label="Open Chat"
-        onClick={toggleChat}
-        className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full p-0 shadow-lg bg-gradient-to-br from-primary to-secondary text-primary-foreground hover:opacity-90 transition-opacity"
+    // Use WebchatProvider to provide the client and configuration
+    <WebchatProvider client={clientRef.current} configuration={configuration}>
+      {/* Chat Toggle Button (Fab) */}
+      <Button
+        variant="default" // Or choose another variant like 'secondary', 'outline'
+        size="icon"
+        onClick={toggleWebchat}
+        className="fixed bottom-4 right-4 rounded-full shadow-lg z-50 w-14 h-14 bg-gradient-to-r from-primary to-secondary text-primary-foreground hover:opacity-90"
+        aria-label={isWebchatOpen ? 'Close Chat' : 'Open Chat'}
+      >
+        {isWebchatOpen ? (
+          // Optional: Change icon when open, e.g., X icon
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        ) : (
+          <MessageSquare className="w-6 h-6" />
+        )}
+      </Button>
+
+      {/* Webchat Window */}
+      {isWebchatOpen && (
+        <div
+          className="fixed bottom-[calc(4rem+1rem)] right-4 z-50 rounded-lg shadow-xl overflow-hidden border border-border"
+          style={{ width: '370px', height: 'min(70vh, 550px)' }} // Adjust size as needed
         >
-        <MessageSquare className="h-7 w-7" />
-     </Button>
+           {/* Render Webchat component only when client is available */}
+           <Webchat />
+        </div>
+      )}
+    </WebchatProvider>
   );
 }
 
-// Add Botpress types to the global window interface
-declare global {
-  interface Window {
-    botpressWebChat?: {
-      init: (config: BotpressConfig) => void;
-      sendEvent: (event: { type: string, payload?: any }) => void;
-      onEvent: (callback: (event: any) => void, eventTypes?: string[]) => void;
-    };
-  }
-}
-
-// Define a basic type for the Botpress config
-interface BotpressConfig {
-  composerPlaceholder?: string;
-  botConversationDescription?: string;
-  botId: string;
-  hostUrl: string;
-  messagingUrl: string;
-  clientId: string;
-  botName?: string;
-  avatarUrl?: string;
-  phoneNumber?: string;
-  stylesheet?: string;
-  brandColor?: string;
-  conversationColor?: string;
-  buttonBackgroundColor?: string;
-  buttonTextColor?: string;
-  headerBackgroundColor?: string;
-  headerTextColor?: string;
-  // Add other relevant config options based on Botpress documentation
-   frontendVersion?: string;
-   useSessionStorage?: boolean;
-   enableConversationDeletion?: boolean;
-   hideWidget?: boolean;
-   disableAnimations?: boolean;
-   closeOnEscape?: boolean;
-   showConversationsButton?: boolean;
-   enableTranscriptDownload?: boolean;
-}
-
+// Make it the default export if necessary for dynamic loading or other use cases
+export default BotpressChat;
