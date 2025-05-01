@@ -1,26 +1,28 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Inter } from 'next/font/google'; // Using Inter as a more standard sans-serif font
 import './globals.css';
-// Import the local copy of Botpress CSS
-import '@/styles/botpress.css';
+// Import the local copy of Botpress CSS to allow modifications/fixes
+// Removed: import '@/styles/botpress.css'; // This file doesn't exist and caused errors
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
-import { BotpressChat } from '@/components/botpress-chat';
 import { Toaster } from "@/components/ui/toaster"
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
+// If Geist fonts are explicitly required, uncomment the lines below
+// import { Geist, Geist_Mono } from 'next/font/google';
+// const geistSans = Geist({
+//   variable: '--font-geist-sans',
+//   subsets: ['latin'],
+// });
+// const geistMono = Geist_Mono({
+//   variable: '--font-geist-mono',
+//   subsets: ['latin'],
+// });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' }); // Use Inter font
 
 export const metadata: Metadata = {
   title: 'OptiAssist - Your Virtual Assistant',
-  description: 'OptiAssist company website with integrated AI virtual assistant.',
+  description: 'Optitech company website with integrated AI virtual assistant.',
 };
 
 export default function RootLayout({
@@ -30,13 +32,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}>
+      {/* Use Inter font variable, remove Geist if not used */}
+      <body className={`${inter.variable} font-sans antialiased flex flex-col min-h-screen`}>
         <Header />
         <main className="flex-grow">
           {children}
         </main>
         <Footer />
-        <BotpressChat />
         <Toaster />
       </body>
     </html>
