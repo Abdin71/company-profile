@@ -31,7 +31,7 @@
 
 ## About The Project
 
-[![Company Page](public/company_page.png)](public/company_page.png)
+[![Company Page](docs/company_page.png)](docs/company_page.png)
 
 This mobile-responsive company website provides key business information while enabling seamless visitor interaction. Its standout feature is an AI-powered virtual assistant that answers product, service, and policy queries through an intuitive chat interface. The site includes standard sections—homepage, about us, products/services, contact page, and FAQ—all optimized for any device. With clean navigation and smart AI integration, it delivers a modern user experience that efficiently connects customers with company information. The assistant guides users through processes like form submissions and information searches, combining traditional web content with intelligent conversational support.
 
