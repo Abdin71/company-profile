@@ -116,8 +116,10 @@ export function Footer() {
 
        {/* Botpress Scripts - Moved client-side rendering to a separate component */}
        {/* These script tags might cause issues in Next.js; consider BotpressChat component */}
-      {/* <script src="https://cdn.botpress.cloud/webchat/v2.4/inject.js"></script>
-      <script src="https://files.bpcontent.cloud/2025/04/28/10/20250428100413-HN7MUCN6.js"></script>
+     
+    <script src="https://cdn.botpress.cloud/webchat/v2.4/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2025/04/28/10/20250428100413-HN7MUCN6.js"></script>
+    
       <script
         dangerouslySetInnerHTML={{
           __html: `
@@ -130,13 +132,12 @@ export function Footer() {
             "themeName": "prism",
             "botName": "OptiAssist",
             "avatarUrl": "/logo.png", // Example avatar URL
-            "stylesheet": "https://webchat-styler-css.botpress.app/prod/code/your-css-code", // Replace with your actual stylesheet URL if you have one
             "frontendVersion": "v2.4"
             // Add other configuration options as needed
         });
           `,
         }}
-      /> */}
+      />
     </footer>
   );
 }
