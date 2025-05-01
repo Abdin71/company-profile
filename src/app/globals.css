@@ -1,3 +1,8 @@
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -88,5 +93,19 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  .section-container {
+    @apply flex flex-col items-center justify-center min-h-screen w-full;
+  }
+
+  .scroll-down-button {
+    @apply absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer animate-bounce;
+  }
+  .scroll-down-button .chevron {
+    @apply w-8 h-8 text-primary;
+  }
+  .scroll-down-button:hover .chevron {
+    @apply text-accent;
   }
 }

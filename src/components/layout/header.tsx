@@ -47,7 +47,7 @@ export function Header() {
     <Link
       key={link.href}
       href={link.href}
-      className={`transition-colors hover:text-accent ${activeSection === link.href.substring(1) ? 'text-accent font-semibold' : 'text-foreground/80'} ${isMobile ? 'block py-2 text-lg' : 'text-sm font-medium'}`}
+      className={`transition-colors hover:text-blue-500 ${activeSection === link.href.substring(1) ? 'text-blue-500 font-semibold' : 'text-foreground/80'} ${isMobile ? 'block py-2 text-lg' : 'text-sm font-medium'}`}
       onClick={(e) => {
          // Close mobile menu if open
          if (isMobile) {
@@ -82,16 +82,7 @@ export function Header() {
         {/* Desktop Navigation */}
         <nav className="hidden items-center gap-6 md:flex">
           {renderNavLinks()}
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
-            <div className="flex items-center gap-1">
-              <Phone className="h-4 w-4" />
-              <span>(555) 123-4567</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <Clock className="h-4 w-4" />
-              <span>Mon-Fri 9am-5pm</span>
-            </div>
-          </div>
+
         </nav>
 
         {/* Mobile Navigation */}
@@ -123,16 +114,6 @@ export function Header() {
                <nav className="flex flex-col gap-4 p-4">
                  {renderNavLinks(true)}
                </nav>
-                <div className="mt-auto p-4 border-t flex flex-col gap-4 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-2">
-                    <Phone className="h-4 w-4" />
-                    <span>(555) 123-4567</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Clock className="h-4 w-4" />
-                    <span>Mon-Fri 9am-5pm</span>
-                  </div>
-                </div>
              </div>
           </SheetContent>
         </Sheet>

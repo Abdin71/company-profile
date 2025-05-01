@@ -82,22 +82,14 @@ export function ContactSection({ id }: SectionProps) {
                 <MapPin className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
                 <div>
                   <h3 className="font-semibold">Our Office</h3>
-                  <p className="text-muted-foreground">123 Tech Avenue, Suite 400<br />Innovation City, TX 75001</p>
-                </div>
-              </div>
-               <div className="flex items-start gap-4">
-                <Phone className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
-                <div>
-                  <h3 className="font-semibold">Phone</h3>
-                  <a href="tel:+15551234567" className="text-muted-foreground hover:text-primary transition-colors">(555) 123-4567</a>
-                  <p className="text-sm text-muted-foreground/80">Mon-Fri 9am - 5pm CST</p>
+                  <p className="text-muted-foreground">123 Storgatan, Stockholm, Sweden</p>
                 </div>
               </div>
                <div className="flex items-start gap-4">
                 <Mail className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
                  <div>
                   <h3 className="font-semibold">Email</h3>
-                  <a href="mailto:info@optitech.com" className="text-muted-foreground hover:text-primary transition-colors">info@optitech.com</a>
+                  <a href="mailto:alex.svensson@email.com" className="text-muted-foreground hover:text-primary transition-colors">alex.svensson@email.com</a>
                    <p className="text-sm text-muted-foreground/80">We typically respond within 24 hours</p>
                 </div>
               </div>
@@ -166,7 +158,7 @@ export function ContactSection({ id }: SectionProps) {
                     />
                     <Button type="submit" size="lg" className="w-full bg-gradient-to-r from-primary to-secondary text-primary-foreground shadow-lg hover:opacity-90 transition-opacity">Send Message</Button>
                   </form>
-                </Form>
+                  </Form>
             </CardContent>
            </Card>
         </div>
