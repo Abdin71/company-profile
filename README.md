@@ -31,10 +31,10 @@
 
 ## About The Project
 
-This project is a dynamic and user-friendly web app designed to provide users. The platform ensures that users stay informed about the latest events across multiple domains, including.
+[![Company Page](public/company_page.png)](public/company_page.png)
 
-React was used in the development of the web app to create an interactive user interface. The backend was written using Firebase, which makes it simple to write and read data, authorize clients, and process that data.
-This is a portfolio website which shows the profile of a developer.
+This mobile-responsive company website provides key business information while enabling seamless visitor interaction. Its standout feature is an AI-powered virtual assistant that answers product, service, and policy queries through an intuitive chat interface. The site includes standard sections—homepage, about us, products/services, contact page, and FAQ—all optimized for any device. With clean navigation and smart AI integration, it delivers a modern user experience that efficiently connects customers with company information. The assistant guides users through processes like form submissions and information searches, combining traditional web content with intelligent conversational support.
+
 ### Key Features:
 - ✅ This is a single page application.
 - ✅ Has one-page scrolling.
@@ -44,6 +44,8 @@ This is a portfolio website which shows the profile of a developer.
 - ✅ Uses Botpress for AI webchat.
 - ✅ Has dark mode.
 
+
+This project was built with Firebase Studio.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -92,8 +94,6 @@ Before starting the application, ensure you have the following installed:
 * Node.js – Download [https://nodejs.org/en](https://nodejs.org/en)
 * npm (Node Package Manager) – Included with Node.js installation.
 * Docker - Download [https://www.docker.com/](https://www.docker.com/) (optional, to run using docker)
-
-
 
 
 ## Installation
