@@ -25,10 +25,7 @@
   </ol>
 </details>
 
-
-
 <!-- ABOUT THE PROJECT -->
-
 ## About The Project
 
 [![Company Page](docs/company_page.png)](docs/company_page.png)
@@ -44,15 +41,11 @@ This mobile-responsive company website provides key business information while e
 - ✅ Uses Botpress for AI webchat.
 - ✅ Has dark mode.
 
-
 This project was built with Firebase Studio.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- USAGE EXAMPLES -->
-
 ## Usage
 
 To start the app:
@@ -61,10 +54,7 @@ To start the app:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- BUILT WITH -->
-
 ### Built With
 
 This project was built with:
@@ -77,14 +67,10 @@ This project was built with:
 - Tailwindcss – CSS Framework for developing responsive websites.
 - Shadcn - An adaptable component library for using Tailwind CSS and React.
 
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 <!-- GETTING STARTED -->
-
 ## Getting Started
-
 
 
 ### Prerequisites
@@ -95,11 +81,42 @@ Before starting the application, ensure you have the following installed:
 * npm (Node Package Manager) – Included with Node.js installation.
 * Docker - Download [https://www.docker.com/](https://www.docker.com/) (optional, to run using docker)
 
-
 ## Installation
 Install project dependencies on your local machine. These commands install the necessary packages and their dependencies. Run the application using Docker or without Docker.
 
 ### Frontend
-1.  Clone the repo
+1. Go to project directory
+    ```sh
+   cd company-profile
+   ```
+2. Install dependencies
+   ```sh
+   npm install
+   ```
+3. Run products using npm
+   ```sh
+   npm run dev
+   ```
+Run project using docker:
+
+1. Go to project directory
+    ```sh
+   cd company-profile
+   ```
+
+2. Build and run frontend
+   ```sh
+   docker build -t company-profile .
+   docker run -p 3000:3000 company-profile
+   ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- LICENSE -->
+## License
+
+Distributed under the Apache License 2.0. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
