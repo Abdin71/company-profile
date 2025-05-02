@@ -26,9 +26,9 @@ export function HomeSection({ id }: SectionProps) {
             </Button>
           </div>
         </div>
-        <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl">
+        <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl opacity-75 border-4 border-blue-400">
            <Image
-             src="https://picsum.photos/id/532/1280/720"
+             src="https://picsum.photos/id/893/1280/720"
              alt="Modern technology abstract"
              layout="fill"
              objectFit="cover"
