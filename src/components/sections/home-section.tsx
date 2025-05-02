@@ -28,7 +28,7 @@ export function HomeSection({ id }: SectionProps) {
         </div>
         <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl">
            <Image
-             src="https://picsum.photos/seed/techhome/1280/720"
+             src="https://picsum.photos/id/532/1280/720"
              alt="Modern technology abstract"
              layout="fill"
              objectFit="cover"
